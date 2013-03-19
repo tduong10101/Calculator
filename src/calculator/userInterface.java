@@ -168,7 +168,6 @@ public class userInterface  extends JFrame {
 			Num.get(i).setText(Integer.toString(i));
 			Num.get(i).setMnemonic(i);
 			Num.get(i).addActionListener(numberAction);
-			System.out.println((char)(i+48));
 			Num.get(i).getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke((char)(i+48)), "numberAction");
 			Num.get(i).getActionMap().put("numberAction",numberAction);
 		}
@@ -236,7 +235,9 @@ public class userInterface  extends JFrame {
 		
 		AbstractAction equalAction = new AbstractAction(){
 			public void actionPerformed(ActionEvent arg0){
-				resultT.setText(cal());
+				if (Double.isNaN(y)==false){
+					resultT.setText(cal());
+				}
 				x = Double.parseDouble(resultT.getText());
 				hit = true;
 			}
@@ -265,6 +266,7 @@ public class userInterface  extends JFrame {
 		
 		this.setVisible(true);
 		this.requestFocus();
+		
 	}
 	public String cal(){
 		String r ="";
@@ -291,8 +293,6 @@ public class userInterface  extends JFrame {
 	public void setOperate(int setAction){
 		if ((Double.isNaN(y)==false)&&(hit==false)){
 			resultT.setText(cal());
-			
-			
 		} 
 		x = Double.parseDouble(resultT.getText());
 		y = Double.NaN;
